@@ -1,5 +1,5 @@
 import Date from '@/components/date';
-import { getSortedPostsData } from '@/lib/posts';
+import { PostData, getSortedPostsData } from '@/lib/posts';
 import utilStyles from '@/styles/utils.module.css';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -22,7 +22,7 @@ export async function getStaticProps() {
   };
 }
 
-const Home = ({ allPostsData }) => {
+const Home = ({ allPostsData }: { allPostsData: PostData[] }) => {
   return (
     <Layout home>
       <Head>

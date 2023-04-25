@@ -4,9 +4,14 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 
+export interface PostData {
+  id: string;
+  [key: string]: any;
+}
+
 const postsDirectory = path.join(process.cwd(), 'posts');
 
-export function getSortedPostsData() {
+export function getSortedPostsData(): PostData[] {
   // Get file names under /posts
   const fileNames = fs.readdirSync(postsDirectory);
   const allPostsData = fileNames.map((fileName) => {
@@ -24,7 +29,7 @@ export function getSortedPostsData() {
     return {
       id,
       ...matterResult.data,
-    };
+    } as PostData;
   });
   // Sort posts by date
   return allPostsData.sort((a, b) => {
@@ -35,7 +40,6 @@ export function getSortedPostsData() {
     }
   });
 }
-
 
 export function getAllPostIds() {
   const fileNames = fs.readdirSync(postsDirectory);

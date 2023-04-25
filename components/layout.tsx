@@ -13,7 +13,7 @@ interface LayoutProps {
     home?: boolean;
 }
 
-const fetcher = (url : URL) => fetch(url).then((res) => res.json());
+const fetcher = (url : string) => fetch(url).then((res) => res.json());
 
 export default function Layout({ children, home = false }: LayoutProps) {
     const { data, error } = useSWR('/api/user', fetcher);
