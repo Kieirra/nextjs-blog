@@ -13,6 +13,15 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
+
+    const prisma = new PrismaClient()
+    const posts = await prisma.post.findMany()
+  
+    return {
+      props : { posts }
+    }
+
+
     const postData = await getPostData(params.id);
     return {
         props: {
